@@ -1,23 +1,24 @@
 package setting
 
 import (
-	"github.com/go-ini/ini"
 	"log"
+
+	"github.com/go-ini/ini"
 )
 
 var (
-	cfg *ini.File
+	cfg             *ini.File
 	DatabaseSetting = &Database{}
 )
 
 // Database ...
 type Database struct {
-	Type	string
-	User	string
-	Password 	string
-	Host	string
-	Name	string
-	TablePrefix	string
+	Type        string
+	User        string
+	Password    string
+	Host        string
+	Name        string
+	TablePrefix string
 }
 
 // Setup ...
