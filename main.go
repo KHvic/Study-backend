@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/KHvic/study-backend/dao"
@@ -32,5 +33,6 @@ func main() {
 		WriteTimeout:   writeTimeout,
 		MaxHeaderBytes: 1 << 20,
 	}
+	log.Printf("[info] start http server listening %s", endPoint)
 	server.ListenAndServe()
 }
