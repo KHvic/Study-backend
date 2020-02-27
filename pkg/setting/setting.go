@@ -2,6 +2,7 @@ package setting
 
 import (
 	"log"
+	"time"
 
 	"github.com/go-ini/ini"
 )
@@ -10,6 +11,8 @@ var (
 	cfg *ini.File
 	// AppSetting ...
 	AppSetting = &App{}
+	// ServerSetting ...
+	ServerSetting = &Server{}
 	// DatabaseSetting ...
 	DatabaseSetting = &Database{}
 )
@@ -24,6 +27,14 @@ type App struct {
 	LogSaveName string
 	LogFileExt  string
 	TimeFormat  string
+}
+
+// Server ...
+type Server struct {
+	RunMode      string
+	HttpPort     int
+	ReadTimeout  time.Duration
+	WriteTimeout time.Duration
 }
 
 // Database ...
@@ -44,6 +55,8 @@ func Setup() {
 		log.Fatalf("setting.Setup failed, err: %v", err)
 	}
 
+	mapTo("app", AppSetting)
+	mapTo("server", ServerSetting)
 	mapTo("database", DatabaseSetting)
 }
 
