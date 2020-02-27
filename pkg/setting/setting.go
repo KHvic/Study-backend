@@ -16,6 +16,8 @@ var (
 
 // App ...
 type App struct {
+	PrefixURL string
+
 	RuntimeRootPath string
 
 	LogSavePath string
