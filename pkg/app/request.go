@@ -1,7 +1,7 @@
 package app
 
 import (
-	"github.com/KHvic/study-backend/pkg/logging"
+	"github.com/KHvic/quiz-backend/pkg/logging"
 	"github.com/astaxie/beego/validation"
 )
 

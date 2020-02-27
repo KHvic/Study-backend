@@ -1,7 +1,7 @@
 package dao
 
 import (
-	"github.com/KHvic/study-backend/models"
+	"github.com/KHvic/quiz-backend/models"
 	"github.com/jinzhu/gorm"
 )
 

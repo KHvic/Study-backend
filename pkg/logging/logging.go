@@ -8,8 +8,8 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/KHvic/study-backend/pkg/file"
-	"github.com/KHvic/study-backend/pkg/setting"
+	"github.com/KHvic/quiz-backend/pkg/file"
+	"github.com/KHvic/quiz-backend/pkg/setting"
 )
 
 // Level indicates importance level of log

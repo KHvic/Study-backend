@@ -3,9 +3,9 @@ package v1
 import (
 	"net/http"
 
-	"github.com/KHvic/study-backend/dao"
-	"github.com/KHvic/study-backend/pkg/app"
-	"github.com/KHvic/study-backend/pkg/constant"
+	"github.com/KHvic/quiz-backend/dao"
+	"github.com/KHvic/quiz-backend/pkg/app"
+	"github.com/KHvic/quiz-backend/pkg/constant"
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
 	"github.com/unknwon/com"

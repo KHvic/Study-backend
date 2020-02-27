@@ -1,7 +1,7 @@
 package app
 
 import (
-	"github.com/KHvic/study-backend/pkg/constant"
+	"github.com/KHvic/quiz-backend/pkg/constant"
 	"github.com/gin-gonic/gin"
 )
 

@@ -5,10 +5,10 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/KHvic/study-backend/dao"
-	"github.com/KHvic/study-backend/pkg/logging"
-	"github.com/KHvic/study-backend/pkg/setting"
-	"github.com/KHvic/study-backend/routers"
+	"github.com/KHvic/quiz-backend/dao"
+	"github.com/KHvic/quiz-backend/pkg/logging"
+	"github.com/KHvic/quiz-backend/pkg/setting"
+	"github.com/KHvic/quiz-backend/routers"
 	"github.com/gin-gonic/gin"
 )
 

@@ -1,8 +1,8 @@
 package routers
 
 import (
-	"github.com/KHvic/study-backend/dao"
-	v1 "github.com/KHvic/study-backend/routers/api/v1"
+	"github.com/KHvic/quiz-backend/dao"
+	v1 "github.com/KHvic/quiz-backend/routers/api/v1"
 	"github.com/gin-gonic/gin"
 )
 

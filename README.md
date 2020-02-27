@@ -1,4 +1,4 @@
-# Study-backend
+# quiz-backend
 
 ## Project layout
 

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/KHvic/study-backend/pkg/setting"
+	"github.com/KHvic/quiz-backend/pkg/setting"
 	"github.com/jinzhu/gorm"
 
 	// SQL driver

@@ -3,7 +3,7 @@ package app
 import (
 	"net/http"
 
-	"github.com/KHvic/study-backend/pkg/constant"
+	"github.com/KHvic/quiz-backend/pkg/constant"
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
 )
