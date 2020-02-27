@@ -33,6 +33,6 @@ func InitRouter() *gin.Engine {
 
 	apiv1 := r.Group("/api/v1")
 	apiv1.GET("/question/:id", router.questionHandler.GetQuestion)
-
+	apiv1.GET("/questions/:subcat", router.questionHandler.GetSubCatQuestions)
 	return r
 }

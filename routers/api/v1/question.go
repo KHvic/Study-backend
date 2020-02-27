@@ -41,3 +41,25 @@ func (h *QuestionHandler) GetQuestion(c *gin.Context) {
 	}
 	appG.Response(http.StatusOK, constant.Success, question)
 }
+
+// GetSubCatQuestions ...
+func (h *QuestionHandler) GetSubCatQuestions(c *gin.Context) {
+	appG := app.Gin{C: c}
+	k := com.StrTo(c.DefaultQuery("k", "1")).MustInt()
+	subcat := com.StrTo(c.Param("subcat")).String()
+	valid := validation.Validation{}
+	valid.Min(k, 1, "k")
+
+	if valid.HasErrors() {
+		app.MarkErrors(valid.Errors)
+		appG.Response(http.StatusBadRequest, constant.BadRequest, nil)
+		return
+	}
+
+	questions, err := h.questionDAO.GetBySubCatRandK(subcat, k)
+	if err != nil {
+		appG.Response(http.StatusInternalServerError, constant.InternalError, nil)
+		return
+	}
+	appG.Response(http.StatusOK, constant.Success, questions)
+}

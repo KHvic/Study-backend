@@ -33,7 +33,7 @@ func (*QuestionDAOImpl) GetByID(id int64) (*models.Question, error) {
 // GetBySubCat get questions by sub category
 func (*QuestionDAOImpl) GetBySubCat(sub string) ([]*models.Question, error) {
 	var questions []*models.Question
-	err := db.Where("sub_category = ?", sub).Error
+	err := db.Where("sub_category = ?", sub).Find(&questions).Error
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ func (*QuestionDAOImpl) GetBySubCat(sub string) ([]*models.Question, error) {
 // GetBySubCatRandK get K random questions by sub category
 func (*QuestionDAOImpl) GetBySubCatRandK(sub string, k int) ([]*models.Question, error) {
 	var questions []*models.Question
-	err := db.Limit(k).Where("sub_category = ?", sub).Order(gorm.Expr("rand()")).Error
+	err := db.Limit(k).Where("sub_category = ?", sub).Order(gorm.Expr("rand()")).Find(&questions).Error
 	if err != nil {
 		return nil, err
 	}
