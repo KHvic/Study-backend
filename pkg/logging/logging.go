@@ -6,8 +6,10 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"time"
 
 	"github.com/KHvic/study-backend/pkg/file"
+	"github.com/KHvic/study-backend/pkg/setting"
 )
 
 // Level indicates importance level of log
@@ -28,16 +30,16 @@ var (
 )
 
 const (
-	// Debug ...
-	Debug Level = iota
-	// Info ...
-	Info
-	// Warning ...
-	Warning
-	// Error ...
-	Error
-	// Fatal ...
-	Fatal
+	// DebugLevel ...
+	DebugLevel Level = iota
+	// InfoLevel ...
+	InfoLevel
+	// WarningLevel ...
+	WarningLevel
+	// ErrorLevel ...
+	ErrorLevel
+	// FatalLevel ...
+	FatalLevel
 )
 
 // Setup initialize the log instance
@@ -55,32 +57,32 @@ func Setup() {
 
 // Debug output logs at debug level
 func Debug(v ...interface{}) {
-	setPrefix(DEBUG)
-	logger.Println(v)
+	setPrefix(DebugLevel)
+	logger.Println(v...)
 }
 
 // Info output logs at info level
 func Info(v ...interface{}) {
-	setPrefix(INFO)
-	logger.Println(v)
+	setPrefix(InfoLevel)
+	logger.Println(v...)
 }
 
 // Warn output logs at warn level
 func Warn(v ...interface{}) {
-	setPrefix(WARNING)
-	logger.Println(v)
+	setPrefix(WarningLevel)
+	logger.Println(v...)
 }
 
 // Error output logs at error level
 func Error(v ...interface{}) {
-	setPrefix(ERROR)
-	logger.Println(v)
+	setPrefix(ErrorLevel)
+	logger.Println(v...)
 }
 
 // Fatal output logs at fatal level
 func Fatal(v ...interface{}) {
-	setPrefix(FATAL)
-	logger.Fatalln(v)
+	setPrefix(FatalLevel)
+	logger.Fatalln(v...)
 }
 
 // setPrefix set the prefix of the log output
@@ -93,4 +95,18 @@ func setPrefix(level Level) {
 	}
 
 	logger.SetPrefix(logPrefix)
+}
+
+// getLogFilePath get the log file save path
+func getLogFilePath() string {
+	return fmt.Sprintf("%s%s", setting.AppSetting.RuntimeRootPath, setting.AppSetting.LogSavePath)
+}
+
+// getLogFileName get the save name of the log file
+func getLogFileName() string {
+	return fmt.Sprintf("%s%s.%s",
+		setting.AppSetting.LogSaveName,
+		time.Now().Format(setting.AppSetting.TimeFormat),
+		setting.AppSetting.LogFileExt,
+	)
 }

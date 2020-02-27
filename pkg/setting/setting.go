@@ -7,9 +7,22 @@ import (
 )
 
 var (
-	cfg             *ini.File
+	cfg *ini.File
+	// AppSetting ...
+	AppSetting = &App{}
+	// DatabaseSetting ...
 	DatabaseSetting = &Database{}
 )
+
+// App ...
+type App struct {
+	RuntimeRootPath string
+
+	LogSavePath string
+	LogSaveName string
+	LogFileExt  string
+	TimeFormat  string
+}
 
 // Database ...
 type Database struct {
