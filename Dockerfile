@@ -9,4 +9,4 @@ COPY . $GOPATH/src/github.com/KHvic/quiz-backend
 RUN go build .
 
 EXPOSE 8080
-CMD ["./quiz-backend.exe"]
+ENTRYPOINT "quiz-backend.exe"

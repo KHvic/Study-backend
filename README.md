@@ -10,7 +10,7 @@
 
 ## Docker
 - docker build -t quiz-backend .
-- docker run -d -p 8000:8000 quiz-backend
+- docker run -d -p 8080:8080 quiz-backend
 
 ## How to run
 - Install MySQL dependency
