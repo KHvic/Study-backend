@@ -55,7 +55,7 @@ func Setup() {
 	if env == "production" {
 		cfg, err = ini.Load("conf/production.ini")
 	} else {
-		cfg, err = ini.Load("conf/app.ini")
+		cfg, err = ini.Load("conf/staging.ini")
 	}
 
 	if err != nil {
