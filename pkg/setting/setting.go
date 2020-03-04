@@ -2,6 +2,7 @@ package setting
 
 import (
 	"log"
+	"os"
 	"time"
 
 	"github.com/go-ini/ini"
@@ -50,11 +51,16 @@ type Database struct {
 // Setup ...
 func Setup() {
 	var err error
-	cfg, err = ini.Load("conf/app.ini")
+	env := os.Getenv("quiz_env")
+	if env == "production" {
+		cfg, err = ini.Load("conf/production.ini")
+	} else {
+		cfg, err = ini.Load("conf/app.ini")
+	}
+
 	if err != nil {
 		log.Fatalf("setting.Setup failed, err: %v", err)
 	}
-
 	mapTo("app", AppSetting)
 	mapTo("server", ServerSetting)
 	mapTo("database", DatabaseSetting)

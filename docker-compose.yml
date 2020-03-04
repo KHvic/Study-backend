@@ -1,16 +1,25 @@
-version: '3'
+version: "2.1"
 
 services:
-    db:
-        image: mysql:8.0.17
-        environment:
-            MYSQL_ROOT_PASSWORD: password
-            MYSQL_DATABASE: quiz
-        volumes:
-            - ./db/data:/var/lib/mysql
     app:
         build: .
         ports:
             - "8080:8080"
         links:
             - db
+        depends_on:
+            db:
+                condition: service_healthy
+    db:
+        image: mysql:8.0.17
+        ports:
+            - "3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_DATABASE: quiz
+        volumes:
+            - ./db/init-mysql-master.sql:/docker-entrypoint-initdb.d/init.sql:ro
+        healthcheck:
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+            timeout: 20s
+            retries: 10

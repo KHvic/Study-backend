@@ -3,7 +3,7 @@ package dao
 import (
 	"fmt"
 	"log"
-
+	
 	"github.com/KHvic/quiz-backend/pkg/setting"
 	"github.com/jinzhu/gorm"
 
@@ -23,7 +23,7 @@ func Setup() {
 		setting.DatabaseSetting.Name))
 
 	if err != nil {
-		log.Fatalf("models.Setup err: %v", err)
+		log.Fatalf("dao.Setup err: %v", err)
 	}
 
 	gorm.DefaultTableNameHandler = func(db *gorm.DB, defaultTableName string) string {
