@@ -2,14 +2,15 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"net/http"
-
 	"github.com/KHvic/quiz-backend/dao"
 	"github.com/KHvic/quiz-backend/pkg/logging"
 	"github.com/KHvic/quiz-backend/pkg/setting"
 	"github.com/KHvic/quiz-backend/routers"
 	"github.com/gin-gonic/gin"
+
+	"log"
+	"net/http"
+	"time"
 )
 
 func init() {
@@ -29,8 +30,8 @@ func main() {
 	server := &http.Server{
 		Addr:           endPoint,
 		Handler:        routersInit,
-		ReadTimeout:    readTimeout,
-		WriteTimeout:   writeTimeout,
+		ReadTimeout:    readTimeout * time.Second,
+		WriteTimeout:   writeTimeout * time.Second,
 		MaxHeaderBytes: 1 << 20,
 	}
 	log.Printf("[info] start http server listening %s", endPoint)

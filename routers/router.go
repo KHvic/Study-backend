@@ -10,6 +10,7 @@ var router *Router
 
 // Router ...
 type Router struct {
+	healthCheckHandler *v1.HealthCheckHandler
 	questionHandler *v1.QuestionHandler
 }
 
@@ -20,9 +21,8 @@ func init() {
 	questionDAO := dao.NewQuestionDAO()
 
 	// init handlers
-	questionHandler := v1.NewQuestionHandler(questionDAO)
-
-	router.questionHandler = questionHandler
+	router.healthCheckHandler = v1.NewHealthCheckHandler()
+	router.questionHandler = v1.NewQuestionHandler(questionDAO)
 }
 
 // InitRouter register routes
@@ -32,7 +32,9 @@ func InitRouter() *gin.Engine {
 	r.Use(gin.Recovery())
 
 	apiv1 := r.Group("/api/v1")
+	apiv1.GET("/healthcheck", router.healthCheckHandler.Get)
 	apiv1.GET("/question/:id", router.questionHandler.GetQuestion)
 	apiv1.GET("/questions/:subcat", router.questionHandler.GetSubCatQuestions)
+
 	return r
 }
