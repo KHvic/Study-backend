@@ -11,7 +11,7 @@ var router *Router
 // Router ...
 type Router struct {
 	healthCheckHandler *v1.HealthCheckHandler
-	questionHandler *v1.QuestionHandler
+	questionHandler    *v1.QuestionHandler
 }
 
 func init() {
@@ -33,8 +33,8 @@ func InitRouter() *gin.Engine {
 
 	apiv1 := r.Group("/api/v1")
 	apiv1.GET("/healthcheck", router.healthCheckHandler.Get)
-	apiv1.GET("/question/:id", router.questionHandler.GetQuestion)
-	apiv1.GET("/questions/:subcat", router.questionHandler.GetSubCatQuestions)
+	apiv1.GET("/questions/:id", router.questionHandler.GetQuestion)
+	apiv1.GET("/category/:subcat/questions", router.questionHandler.GetSubCatQuestions)
 
 	return r
 }

@@ -45,10 +45,10 @@ func (h *QuestionHandler) GetQuestion(c *gin.Context) {
 // GetSubCatQuestions ...
 func (h *QuestionHandler) GetSubCatQuestions(c *gin.Context) {
 	appG := app.Gin{C: c}
-	k := com.StrTo(c.DefaultQuery("k", "1")).MustInt()
+	count := com.StrTo(c.DefaultQuery("count", "1")).MustInt()
 	subcat := com.StrTo(c.Param("subcat")).String()
 	valid := validation.Validation{}
-	valid.Min(k, 1, "k")
+	valid.Min(count, 1, "count")
 
 	if valid.HasErrors() {
 		app.MarkErrors(valid.Errors)
@@ -56,7 +56,7 @@ func (h *QuestionHandler) GetSubCatQuestions(c *gin.Context) {
 		return
 	}
 
-	questions, err := h.questionDAO.GetBySubCatRandK(subcat, k)
+	questions, err := h.questionDAO.MGetBySubCat(subcat, count)
 	if err != nil {
 		appG.Response(http.StatusInternalServerError, constant.InternalError, nil)
 		return

@@ -5,3 +5,4 @@ output/
 runtime/
 *.exe
 db/data/
+*.xlsx

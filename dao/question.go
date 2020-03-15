@@ -9,7 +9,7 @@ import (
 type QuestionDAO interface {
 	GetByID(id int64) (*models.Question, error)
 	GetBySubCat(sub string) ([]*models.Question, error)
-	GetBySubCatRandK(sub string, k int) ([]*models.Question, error)
+	MGetBySubCat(sub string, count int) ([]*models.Question, error)
 }
 
 // QuestionDAOImpl ...
@@ -40,10 +40,10 @@ func (*QuestionDAOImpl) GetBySubCat(sub string) ([]*models.Question, error) {
 	return questions, nil
 }
 
-// GetBySubCatRandK get K random questions by sub category
-func (*QuestionDAOImpl) GetBySubCatRandK(sub string, k int) ([]*models.Question, error) {
+// MGetBySubCat get a batch of random questions by sub category
+func (*QuestionDAOImpl) MGetBySubCat(sub string, count int) ([]*models.Question, error) {
 	var questions []*models.Question
-	err := db.Limit(k).Where("sub_category = ?", sub).Order(gorm.Expr("rand()")).Find(&questions).Error
+	err := db.Limit(count).Where("sub_category = ?", sub).Order(gorm.Expr("rand()")).Find(&questions).Error
 	if err != nil {
 		return nil, err
 	}
