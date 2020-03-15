@@ -49,14 +49,14 @@ func (a *Answer) Scan(value interface{}) error {
 
 // Question ...
 type Question struct {
-	ID          int64
-	Category    string
-	SubCategory string
-	Type        QuestionType
-	Description string
-	Options     Options // e.g [["option a", "option b"], ["option c, option d"]]
-	Answer      Answer  // e.g [[1][0]]
-	Image       *string
+	ID          int64        `json:"id"`
+	Category    string       `json:"category"`
+	SubCategory string       `json:"subcategory"`
+	Type        QuestionType `json:"type"`
+	Description string       `json:"description"`
+	Options     Options      `json:"options"` // e.g [["option a", "option b"], ["option c, option d"]]
+	Answer      Answer       `json:"answer"`  // e.g [[1][0]]
+	Image       *string      `json:"image,omitempty"`
 }
 
 // TableName ...
