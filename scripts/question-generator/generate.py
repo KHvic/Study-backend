@@ -1,8 +1,10 @@
 import pandas as pd
 import xlrd
+import os.path as path
 
-questionFile = "./greq.xlsx"
-outputFile = "../../db/init-mysql.sql"
+questionFile = path.abspath("./greq.xlsx")
+baseFile = path.abspath("../../db/init-mysql-master.sql")
+outputFile = path.abspath("../../db/data/init-mysql.sql")
 
 def addQuote(str):
     return "'" + str + "'"
@@ -24,12 +26,17 @@ def generateSQL(type):
     return sql
     
 def main():
-    file1 = open(outputFile, "w") 
-    
+    base = open(baseFile, "r")
+    baseContent = base.read()
+
+    output = open(outputFile, "w+") 
+    output.write(baseContent)
     types = ["TC1", "SE"]
     for type in types:
-        file1.write(generateSQL(type).encode('ascii', 'ignore').decode('ascii'))
-    file1.close()
+        output.write(generateSQL(type).encode('ascii', 'ignore').decode('ascii'))
+
+    output.close()
+    base.close()
     
 if __name__== "__main__":
     main()

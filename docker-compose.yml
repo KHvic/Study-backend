@@ -18,7 +18,7 @@ services:
             MYSQL_ROOT_PASSWORD: password
             MYSQL_DATABASE: quiz
         volumes:
-            - ./db/init-mysql-master.sql:/docker-entrypoint-initdb.d/init.sql:ro
+            - ./db/data/init-mysql.sql:/docker-entrypoint-initdb.d/init.sql:ro
         healthcheck:
             test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
             timeout: 20s

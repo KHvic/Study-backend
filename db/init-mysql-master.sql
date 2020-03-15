@@ -1,5 +1,7 @@
 CREATE DATABASE `study` DEFAULT CHARACTER SET utf8;
 
+USE `study`;
+
 CREATE TABLE `question` (
     `id` int unsigned NOT NULL AUTO_INCREMENT,
     `category` varchar(100) DEFAULT '',
@@ -10,4 +12,4 @@ CREATE TABLE `question` (
     `answer` varchar(255) NOT NULL,
     `image` varchar(255),
     PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
