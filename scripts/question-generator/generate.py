@@ -18,9 +18,9 @@ def generateSQL(type):
     for _, row in df.iterrows():
         value = "(" + addQuote(row["category"]) + "," + addQuote(row["sub_category"]) + ","
         value = value + addQuote2(row["description"]) + "," + addQuote(row["options"]) + ","
-        value = value + addQuote(row["answer"]) + "," + str(row["type"]) + ")"
+        value = value + addQuote(row["answers"]) + "," + str(row["type"]) + ")"
         values.append(value)
-    sql = "INSERT INTO `question` (`category`, `sub_category`, `description`, `options`, `answer`, `type`) VALUES"
+    sql = "INSERT INTO `question` (`category`, `sub_category`, `description`, `options`, `answers`, `type`) VALUES"
     sql += ",".join(values)
     sql += ";\n"
     return sql

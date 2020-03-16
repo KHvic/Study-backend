@@ -32,17 +32,17 @@ func (o *Options) Scan(value interface{}) error {
 	return json.Unmarshal(bytes, o)
 }
 
-// Answer represent answer type
-type Answer [][]int
+// Answers represent answer type
+type Answers [][]int
 
-// Value indicate how database store Answer type
-func (a Answer) Value() (driver.Value, error) {
+// Value indicate how database store Answers type
+func (a Answers) Value() (driver.Value, error) {
 	bytes, _ := json.Marshal(a)
 	return string(bytes), nil
 }
 
-// Scan indicate how application read Answer type
-func (a *Answer) Scan(value interface{}) error {
+// Scan indicate how application read Answers type
+func (a *Answers) Scan(value interface{}) error {
 	bytes, _ := value.([]byte)
 	return json.Unmarshal(bytes, a)
 }
@@ -55,7 +55,7 @@ type Question struct {
 	Type        QuestionType `json:"type"`
 	Description string       `json:"description"`
 	Options     Options      `json:"options"` // e.g [["option a", "option b"], ["option c, option d"]]
-	Answer      Answer       `json:"answer"`  // e.g [[1][0]]
+	Answers     Answers      `json:"answers"` // e.g [[1][0]]
 	Image       *string      `json:"image,omitempty"`
 }
 
