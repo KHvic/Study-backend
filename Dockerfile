@@ -1,5 +1,3 @@
-# TODO: Setup MySQL, executable will not run now because it is not setup
-
 FROM golang:latest
 
 LABEL maintainer="Victor Goh Ka Hian <kahiangohvictor@gmail.com>"
