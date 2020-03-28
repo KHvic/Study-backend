@@ -33,8 +33,9 @@ def main():
     output.write(baseContent)
     types = ["TC1", "SE"]
     for type in types:
-        output.write(generateSQL(type).encode('ascii', 'ignore').decode('ascii'))
-
+        sql = generateSQL(type)
+        sql = sql.replace(u'\u2013', '-').replace(u'\u2014', '-')
+        output.write(sql)
     output.close()
     base.close()
     
