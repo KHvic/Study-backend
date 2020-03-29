@@ -33,10 +33,25 @@ services:
         volumes:
             # - ./:/var/www  # use this is serving static content from FE build
             - ./conf/nginx/:/etc/nginx/conf.d/
+            - ./conf/certbot/conf:/etc/letsencrypt
+            - ./conf/certbot/www:/var/www/certbot
+        depends_on:
+            - frontend
+            - backend
         networks:
             - app
+        # reload configuration and ssl
+        command: "/bin/sh -c 'while :; do sleep 12h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    certbot:
+        image: certbot/certbot
+        restart: unless-stopped
+        volumes:
+            - ./conf/certbot/conf:/etc/letsencrypt
+            - ./conf/certbot/www:/var/www/certbot
+        # automatic ssl cert renewal every 12 hours
+        entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
     frontend:
-        build: ../quiz-frontend/
+        build: ../quiz-frontend
         restart: unless-stopped
         ports:
             - "3000:3000"
