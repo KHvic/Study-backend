@@ -6,3 +6,4 @@ runtime/
 *.exe
 db/data/
 *.xlsx
+conf/certbot/
