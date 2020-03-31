@@ -46,9 +46,10 @@ func (h *QuestionHandler) GetQuestion(c *gin.Context) {
 func (h *QuestionHandler) GetSubCatQuestions(c *gin.Context) {
 	appG := app.Gin{C: c}
 	count := com.StrTo(c.DefaultQuery("count", "1")).MustInt()
-	subcat := com.StrTo(c.Param("subcat")).String()
+	subcat := com.StrTo(c.DefaultQuery("subcat", "")).String()
 	valid := validation.Validation{}
 	valid.Min(count, 1, "count")
+	valid.Max(count, 20, "count")
 
 	if valid.HasErrors() {
 		app.MarkErrors(valid.Errors)
@@ -62,4 +63,33 @@ func (h *QuestionHandler) GetSubCatQuestions(c *gin.Context) {
 		return
 	}
 	appG.Response(http.StatusOK, constant.Success, questions)
+}
+
+// Validate ...
+func (h *QuestionHandler) Validate(c *gin.Context) {
+	appG := app.Gin{C: c}
+	start := com.StrTo(c.DefaultQuery("start", "0")).MustInt64()
+	count := com.StrTo(c.DefaultQuery("count", "10")).MustInt64()
+	valid := validation.Validation{}
+	valid.Min(count, 1, "count")
+
+	if valid.HasErrors() {
+		app.MarkErrors(valid.Errors)
+		appG.Response(http.StatusBadRequest, constant.BadRequest, nil)
+		return
+	}
+
+	questions, err := h.questionDAO.GetByOffsetAndLimit(start, count)
+	if err != nil {
+		appG.Response(http.StatusInternalServerError, constant.InternalError, nil)
+		return
+	}
+	var failedQuestionIDs []int64
+	for _, q := range questions {
+		if q.Validate() != nil {
+			failedQuestionIDs = append(failedQuestionIDs, q.ID)
+		}
+	}
+
+	appG.Response(http.StatusOK, constant.Success, failedQuestionIDs)
 }

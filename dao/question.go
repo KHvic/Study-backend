@@ -10,6 +10,7 @@ type QuestionDAO interface {
 	GetByID(id int64) (*models.Question, error)
 	GetBySubCat(sub string) ([]*models.Question, error)
 	MGetBySubCat(sub string, count int) ([]*models.Question, error)
+	GetByOffsetAndLimit(offset, limit int64) ([]*models.Question, error)
 }
 
 // QuestionDAOImpl ...
@@ -28,6 +29,16 @@ func (*QuestionDAOImpl) GetByID(id int64) (*models.Question, error) {
 		return nil, err
 	}
 	return question, nil
+}
+
+// GetByOffsetAndLimit get questions by offset and limit
+func (*QuestionDAOImpl) GetByOffsetAndLimit(offset, limit int64) ([]*models.Question, error) {
+	var questions []*models.Question
+	err := db.Offset(offset).Limit(limit).Find(&questions).Error
+	if err != nil {
+		return nil, err
+	}
+	return questions, nil
 }
 
 // GetBySubCat get questions by sub category

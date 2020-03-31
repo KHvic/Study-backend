@@ -31,10 +31,10 @@ def main():
 
     output = open(outputFile, "w+") 
     output.write(baseContent)
-    types = ["TC1", "SE"]
+    types = ["TC", "SE"]
     for type in types:
         sql = generateSQL(type)
-        sql = sql.replace(u'\u2013', '-').replace(u'\u2014', '-')
+        sql = sql.replace(u'\u2013', '--').replace(u'\u2014', '--')
         output.write(sql)
     output.close()
     base.close()

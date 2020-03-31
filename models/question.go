@@ -3,6 +3,8 @@ package models
 import (
 	"database/sql/driver"
 	"encoding/json"
+	"fmt"
+	"strings"
 )
 
 // QuestionType represent type of question
@@ -62,4 +64,17 @@ type Question struct {
 // TableName ...
 func (*Question) TableName() string {
 	return "question"
+}
+
+// Validate checks whether question is valid
+func (q *Question) Validate() error {
+	optionsLen := len(q.Options)
+	answersLen := len(q.Answers)
+	if optionsLen != answersLen {
+		return fmt.Errorf("mismatching options and answers length")
+	}
+	if strings.Count(q.Description, "__________") != optionsLen {
+		return fmt.Errorf("mismatching description and options len")
+	}
+	return nil
 }
